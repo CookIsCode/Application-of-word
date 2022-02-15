@@ -7,6 +7,15 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="5">
+            <Button x:Name="LinkDataTable" Content="link D" Click="LinkDataTable_Click"/>
+            <Button x:Name="BackHome" Content=" Back H" Click="BackHome_Click"/>
+            <Button x:Name="LinkToPort" Content="Port and Export" Click="LinkToPort_Click"/>
+        </StackPanel>
+        <Frame x:Name="PageBrowse" Grid.Column="1" SizeChanged="PageBrowse_SizeChanged" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>
