@@ -8,25 +8,25 @@ using System.Threading.Tasks;
 
 namespace Application_of_word
 {
-    //单词相关主要信息
+    //单词相关主要信息 主数据库抽象
     public class Word
     {
         public int ID { get; set; }
-        public int WordID { get; set; }
-
+        public bool IsGold { get; set; }
         //用于存储数据库单词主要信息
         public ObservableCollection<string> WordData { get; set; }
 
-        public Word(SqliteDataReader _Reader)
+        public Word(SqliteDataReader _Reader,int _id,int _count)
         {
             WordData = new ObservableCollection<string>();
-            LoadData(_Reader);
+            IsGold = false;
+            LoadData(_Reader,_id,_count);
         }
-        private void LoadData(SqliteDataReader _Reader)
+
+        private void LoadData(SqliteDataReader _Reader,int _id,int _count)
         {
-            ID = _Reader.GetInt32(0);
-            WordID = _Reader.GetInt32(2);
-            for (int i = 3; i <= 16; i++)
+            ID = _id;
+            for (int i = 0; i < _count; i++)
             {
                 if (_Reader.IsDBNull(i))
                 {

@@ -13,16 +13,34 @@
             <RowDefinition Height="35" />
             <RowDefinition Height="35"/>
             <RowDefinition Height="*" />
+            <RowDefinition Height="35"/>
         </Grid.RowDefinitions>
         <DockPanel  LastChildFill="True" ToggleButton.Checked="PortMode_Checked" >
-            <Button x:Name="Add" Content="导入" Margin="10,5,10,0" DockPanel.Dock="Right" Click="Add_Click" />
-            <Button x:Name="Brower" Content="浏览" Margin="10,5,0,0" DockPanel.Dock="Right" Click="Brower_Click"/>
+      
             <CheckBox x:Name="PortMode1" Content="txt" Margin="10,10,0,0" DockPanel.Dock="Right"/>
             <CheckBox x:Name="PortMode2" Content="欧路词典" Margin="10,10,0,0" DockPanel.Dock="Right"/>
             <CheckBox x:Name="PortMode3" Content="有道词典" IsChecked="True" Margin="10,10,0,0" DockPanel.Dock="Right"/>
             <TextBox x:Name="SelectFileName" Margin="10,5,0,0"  DockPanel.Dock="Left" IsReadOnly="True"/>
         </DockPanel>
-        <ComboBox x:Name="SelectSheet" Grid.Row="1" Margin="10,5,10,0" />
+        <DockPanel Grid.Row="1" LastChildFill="True">
+            
+            <Button x:Name="Brower" Content="浏览" Margin="10,5,10,0" DockPanel.Dock="Right" Click="Brower_Click"/>
+            <Button x:Name="Add" Content="保存" Margin="10,5,10,0" DockPanel.Dock="Right" Click="Add_Click" Command="Save" >
+                <Button.CommandBindings>
+                    <CommandBinding Command="Save" CanExecute="PortSave_CanExecute" Executed="PortSave_Executed"/>
+                </Button.CommandBindings>
+            </Button>
+            <Button x:Name="DeleteTable" Content="删除" Margin="10,5,10,0" DockPanel.Dock="Right" Click="Add_Click" Command="Delete" >
+                <Button.CommandBindings>
+                    <CommandBinding Command="Delete" CanExecute="DeleteTable_CanExecute" Executed="DeleteTable_Executed"/>
+                </Button.CommandBindings>
+            </Button>
+            <ComboBox x:Name="SelectTable" SelectionChanged="SelectTable_SelectionChanged" DockPanel.Dock="Left" Margin="10,5,10,0" ItemsSource="{Binding}" />
+        </DockPanel>
         <DataGrid x:Name="DataGridSheet" Grid.Row="2" Margin="10,5,10,5" ItemsSource="{Binding}" AutoGenerateColumns="True"/>
+        <DockPanel Grid.Row="3" LastChildFill="False">
+            <Button x:Name="DeleteRow" Content="删除行" Margin="10,5,10,5" DockPanel.Dock="Right" Click="DeleteRow_Click"  />
+            <Button x:Name="AddRow" Content="新增行" Margin="10,5,10,5" DockPanel.Dock="Right" Click="AddRow_Click"/>
+        </DockPanel>
     </Grid>
 </Page>
